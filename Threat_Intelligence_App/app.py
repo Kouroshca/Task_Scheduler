@@ -1,13 +1,15 @@
 import streamlit as st
 from ti_model import analyze_message
 
-st.set_page_config(page_title="Threat Intelligence Analyzer")
+st.set_page_config(page_title="Threat Intelligence Analyzer", layout="centered")
 
 st.title("🛡️ Threat Intelligence Analyzer")
+st.write("Paste an email or SMS message to analyze potential threats.")
 
 message = st.text_area(
-    "Enter a message to analyze",
-    placeholder="Paste an email or SMS here..."
+    "Message to analyze",
+    placeholder="Paste an email or SMS here...",
+    height=150
 )
 
 if st.button("Analyze Threat"):
@@ -16,9 +18,9 @@ if st.button("Analyze Threat"):
     else:
         result = analyze_message(message)
 
-        st.subheader("Results")
+        st.subheader("📊 Analysis Result")
+        st.metric("Threat Score", f"{result['threat_score']}/100")
         st.write(f"**Verdict:** {result['verdict']}")
-        st.write(f"**Threat Score:** {result['threat_score']} / 100")
 
-        st.subheader("Indicators of Compromise (IOCs)")
+        st.subheader("🔎 Indicators of Compromise (IOCs)")
         st.json(result["iocs"])
