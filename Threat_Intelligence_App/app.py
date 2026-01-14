@@ -22,5 +22,10 @@ if st.button("Analyze Threat"):
         st.metric("Threat Score", f"{result['threat_score']}/100")
         st.write(f"**Verdict:** {result['verdict']}")
 
+        # Display ML prediction and IOCs
+        st.subheader("🤖 Machine Learning Analysis")
+        st.write(f"Prediction: **{result['ml_prediction'].upper()}**")
+        st.write(f"Confidence: **{result['ml_confidence']}%**")
+
         st.subheader("🔎 Indicators of Compromise (IOCs)")
         st.json(result["iocs"])

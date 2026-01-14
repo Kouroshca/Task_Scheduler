@@ -1,2 +1,4 @@
 regex
 streamlit
+scikit-learn
+pandas
