@@ -1,31 +1,11 @@
 import pickle
-import os
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+model = pickle.load(open("spam_model.pkl", "rb"))
+vectorizer = pickle.load(open("vectorizer.pkl", "rb"))
 
-model_path = os.path.join(BASE_DIR, "spam_model.pkl")
-vectorizer_path = os.path.join(BASE_DIR, "vectorizer.pkl")
+def predict_spam(text):
+    text_vec = vectorizer.transform([text])
+    prediction = model.predict(text_vec)[0]
+    probability = max(model.predict_proba(text_vec)[0])
 
-try:
-    model = pickle.load(open(model_path, "rb"))
-except Exception as e:
-    raise RuntimeError(f"Failed to load model: {e}")
-
-try:
-    vectorizer = pickle.load(open(vectorizer_path, "rb"))
-except Exception as e:
-    raise RuntimeError(f"Failed to load vectorizer: {e}")
-
-def predict_spam(message):
-    """
-    Takes a message string, transforms it using the vectorizer,
-    and returns the model's prediction.
-    """
-    # 1. Transform the input text into the format the model expects
-    data = vectorizer.transform([message])
-    
-    # 2. Make the prediction
-    prediction = model.predict(data)
-    
-    # 3. Return the result (usually 0 for ham, 1 for spam)
-    return prediction[0]
+    return prediction, round(probability * 100, 2)
