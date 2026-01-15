@@ -1,7 +1,11 @@
 import pickle
+import os
 
-model = pickle.load(open("spam_model.pkl", "rb"))
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+model_path = os.path.join(BASE_DIR, "spam_model.pkl")
 vectorizer = pickle.load(open("vectorizer.pkl", "rb"))
+
+model = pickle.load(open(model_path, "rb"))
 
 def predict_spam(text):
     text_vec = vectorizer.transform([text])
