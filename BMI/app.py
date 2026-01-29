@@ -6,8 +6,8 @@ st.set_page_config(page_title="BMI Calculator for everyone", layout="centered")
 st.title(" BMI Calculator ")
 
 # Input weight and height
-weight_unit = st.radio("Select Weight Unit:", ["Kilograms (kg)", "Pounds (lbs)"], horizontal =True)
-height_unit = st.radio("Select Height Unit:", ["Centimeters (cm)", "Feet (ft)"], vertical =True)
+weight_unit = st.radio("Select Weight Unit:", ["Kilograms (kg)", "Pounds (lbs)"], horizontal=True)
+height_unit = st.radio("Select Height Unit:", ["Centimeters (cm)", "Feet (ft)"], horizontal=True)
 
 if weight_unit == "Kilograms (kg)":
     weight = st.number_input("Enter your weight (kg):", min_value=1.0)
