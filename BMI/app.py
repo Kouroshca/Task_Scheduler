@@ -29,8 +29,8 @@ else: # Inches
 #buttons
 
 if st.button("Calculate BMI"):
-    bmi, category = calculate_bmi(weight_kg, height_m)
-
+    bmi = calculate_bmi(weight_kg, height_m)
+    category = bmi_category(bmi)
     if bmi is None:
         st.error("Please enter valid weight and height values.")
 
