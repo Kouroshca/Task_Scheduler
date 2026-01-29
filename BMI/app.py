@@ -1,5 +1,8 @@
 import streamlit as st
-from Main import calculate_bmi, bmi_category
+from Main import calculate_bmi
+from ml_model import predict_bmi_category
+from food_recommender import recommend_food
+
 
 st.set_page_config(page_title="BMI Calculator for everyone", layout="centered")
 
@@ -30,19 +33,31 @@ else: # Feet
 
 if st.button("Calculate BMI"):
     bmi = calculate_bmi(weight_kg, height_m)
-    category = bmi_category(bmi)
+
     if bmi is None:
         st.error("Please enter valid weight and height values.")
 
-    else: 
-        st.subheader("Your BMI Results:")
-        st.metric("BMI Value:", f"{bmi:.2f}")
+    else:
+        height_cm = height_m * 100
+        ml_category, confidence = predict_bmi_category(height_cm, weight_kg)
+        foods = recommend_food(ml_category)
 
-        if category == "Underweight":
-            st.info(category)
-        elif category == "Normal":
-            st.success(category)
-        elif category == "Overweight":
-            st.warning(category)
-        elif category == "Obese":
-            st.error(category)
+        st.subheader("Your BMI Results")
+        st.metric("BMI value", f"{bmi:.2f}")
+
+        st.write(f"Predicted Category: **{ml_category}** (Confidence: {confidence}%)")
+
+        if ml_category == "Underweight":
+            st.info(ml_category)
+        elif ml_category == "Normal weight":
+            st.success(ml_category)
+        elif ml_category == "Overweight":
+            st.warning(ml_category)
+        else:
+            st.error(ml_category)
+
+        st.subheader("Food Recommendations")
+        for food in foods:
+            st.write(f"- {food}")
+
+        st.caption("Note that: This BMI calculator provides an estimate and should not replace professional medical advice.")
