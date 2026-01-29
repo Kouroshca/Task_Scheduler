@@ -7,7 +7,7 @@ st.title(" BMI Calculator ")
 
 # Input weight and height
 weight_unit = st.radio("Select Weight Unit:", ["Kilograms (kg)", "Pounds (lbs)"], horizontal =True)
-height_unit = st.radio("Select Height Unit:", ["Centimeters (cm)", "Inches (in)"], horizontal =True)
+height_unit = st.radio("Select Height Unit:", ["Centimeters (cm)", "Feet (ft)"], vertical =True)
 
 if weight_unit == "Kilograms (kg)":
     weight = st.number_input("Enter your weight (kg):", min_value=1.0)
@@ -22,9 +22,9 @@ if height_unit == "Centimeters (cm)":
     height = st.number_input("Enter your height (cm):", min_value=0.5)
     height_m = height / 100
 
-else: # Inches
-    height = st.number_input("Enter your height (in):", min_value=0.5)
-    height_m = height * 0.0254
+else: # Feet
+    height = st.number_input("Enter your height (ft):", min_value=0.5)
+    height_m = height * 0.3048
 
 #buttons
 
