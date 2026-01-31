@@ -22,11 +22,18 @@ else:
 
 # height input
 if height_unit == "Centimeters (cm)":
-    height = st.number_input("Enter your height (cm):", min_value=0.5)
+    height = st.number_input(
+        "Enter your height (cm):",
+        min_value=50.0,
+        max_value=250.0
+    )
     height_m = height / 100
-
-else: # Feet
-    height = st.number_input("Enter your height (ft):", min_value=0.5)
+else:
+    height = st.number_input(
+        "Enter your height (ft):",
+        min_value=3.0,
+        max_value=8.0
+    )
     height_m = height * 0.3048
 
 #buttons
