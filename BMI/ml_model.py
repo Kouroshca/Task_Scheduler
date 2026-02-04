@@ -1,8 +1,9 @@
+# ml_model.py
 import pickle
-import os
 import numpy as np
+import os
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.dirname(__file__)
 MODEL_PATH = os.path.join(BASE_DIR, "bmi_model.pkl")
 
 with open(MODEL_PATH, "rb") as f:
@@ -10,6 +11,6 @@ with open(MODEL_PATH, "rb") as f:
 
 def predict_bmi_category(height_cm, weight_kg):
     x = np.array([[height_cm, weight_kg]])
-    prediction = model.predict(x)[0]
-    confidence = max(model.predict_proba(x)[0])
-    return prediction, round(confidence * 100, 2)
+    pred = model.predict(x)[0]
+    conf = max(model.predict_proba(x)[0])
+    return pred, round(conf * 100, 2)
