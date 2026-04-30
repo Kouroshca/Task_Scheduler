@@ -37,4 +37,4 @@ Pandas
 Streamlit
 Health recommendation logic
 You can run the application by seleticng to live demo or watch the video: 
-YouTube: x ,  Streamlit:  https://kourosh-bmical.streamlit.app
+YouTube: https://youtu.be/IwJ52NWwKuE ,  Streamlit: https://spam-detector-by-kouroshka.streamlit.app/
